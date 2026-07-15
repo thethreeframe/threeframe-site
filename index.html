@@ -281,7 +281,9 @@
     text-decoration: none;
     padding: 15px 22px;
     border-radius: 2px;
+    border: none;
     display: inline-block;
+    cursor: pointer;
   }
   .btn.primary { background: var(--ink); color: var(--paper); }
   .btn.ghost { border: 1px solid var(--line); color: var(--ink); }
@@ -501,6 +503,69 @@
   }
   .foot-bottom .mono { font-size: 11px; }
 
+  /* inquiry modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgba(8, 9, 8, 0.55);
+    opacity: 0;
+    visibility: hidden;
+  }
+  .modal-backdrop.is-open { opacity: 1; visibility: visible; }
+  @media (prefers-reduced-motion: no-preference) {
+    .modal-backdrop {
+      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    }
+    .modal-backdrop.is-open { transition: opacity 0.3s ease; }
+  }
+  .modal-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.3);
+    transform: translateY(100%);
+  }
+  .modal-sheet.is-open { transform: translateY(0); }
+  @media (prefers-reduced-motion: no-preference) {
+    .modal-sheet { transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1); }
+  }
+  .modal-inner { padding: 14px 48px 48px; }
+  .modal-grabber {
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line);
+    margin: 0 auto 22px;
+  }
+  .modal-sheet-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .modal-sheet-head h2 { font-size: 24px; }
+  .modal-close {
+    background: none;
+    border: none;
+    padding: 6px;
+    margin: -6px;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .modal-close:hover { color: var(--rec); }
+  .modal-close:focus-visible { outline: 2px solid var(--rec); outline-offset: 2px; }
+  body.modal-open { overflow: hidden; }
+
   @media (max-width: 860px) {
     .wrap { padding: 0 22px; }
     .nav-inner { padding: 16px 22px; }
@@ -512,6 +577,7 @@
     .step:first-child, .crew-col:first-child { border-top: none; padding-top: 0; }
     .foot-top { grid-template-columns: 1fr; gap: 40px; }
     .corner { display: none; }
+    .modal-inner { padding: 14px 22px 32px; }
   }
 </style>
 
@@ -547,7 +613,7 @@
       <h1 class="headline">Videos that sell the room and bring <span class="rotator" id="rotator" aria-hidden="true"><span class="rotator-track" id="rotatorTrack"><span class="rotator-word">your</span><span class="rotator-word">company's</span><span class="rotator-word">businesses'</span><span class="rotator-word">products</span><span class="rotator-word">campaigns</span><span class="rotator-word">your</span></span></span><span class="sr-only">your</span> vision to life.</h1>
       <p class="sub">ThreeFrame is the combination of two film students and a business major coming together to bring you the best in video production for your business.</p>
       <div class="cta-row">
-        <a class="btn primary" href="mailto:hello@threeframe.studio">Start a project</a>
+        <button type="button" class="btn primary" id="openInquiry">Start a project</button>
         <a class="btn ghost" href="#services">See what we shoot</a>
       </div>
     </div>
@@ -669,7 +735,7 @@
         <h2>Let's shoot<br />something.</h2>
         <p class="foot-lede">Fill in the form and we'll get back to you — or reach us directly at <a href="mailto:hello@threeframe.studio">hello@threeframe.studio</a> / <a href="https://instagram.com/threeframe.studio">@threeframe.studio</a>. Booking now.</p>
       </div>
-      <form class="inquiry-form reveal" id="inquiryForm">
+      <form class="inquiry-form reveal">
         <label>
           <span class="label">Name</span>
           <input type="text" name="name" autocomplete="name" required />
@@ -693,7 +759,7 @@
           <textarea name="details" required></textarea>
         </label>
         <button type="submit" class="btn primary">Send inquiry</button>
-        <p class="form-status mono" id="formStatus" aria-live="polite"></p>
+        <p class="form-status mono" aria-live="polite"></p>
       </form>
     </div>
     <div class="foot-bottom">
@@ -702,6 +768,43 @@
     </div>
   </div>
 </footer>
+
+<div class="modal-backdrop" id="modalBackdrop"></div>
+<div class="modal-sheet" id="modalSheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="wrap modal-inner">
+    <div class="modal-grabber" aria-hidden="true"></div>
+    <div class="modal-sheet-head">
+      <h2 id="modalTitle">Start a project</h2>
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    </div>
+    <form class="inquiry-form">
+      <label>
+        <span class="label">Name</span>
+        <input type="text" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span class="label">Email</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label>
+        <span class="label">What are you looking for</span>
+        <span class="select-wrap">
+          <select name="project">
+            <option>Business promotionals &amp; social media</option>
+            <option>Real estate &amp; property</option>
+            <option>Something else</option>
+          </select>
+        </span>
+      </label>
+      <label>
+        <span class="label">Tell us about your project</span>
+        <textarea name="details" required></textarea>
+      </label>
+      <button type="submit" class="btn primary">Send inquiry</button>
+      <p class="form-status mono" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
 
 <script>
   (function () {
@@ -808,22 +911,54 @@
   })();
 
   (function () {
-    var form = document.getElementById('inquiryForm');
-    if (!form) return;
-    var status = document.getElementById('formStatus');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var data = new FormData(form);
-      var name = (data.get('name') || '').toString();
-      var email = (data.get('email') || '').toString();
-      var project = (data.get('project') || '').toString();
-      var details = (data.get('details') || '').toString();
-      var subject = encodeURIComponent('New inquiry from ' + name);
-      var body = encodeURIComponent(
-        'Name: ' + name + '\nEmail: ' + email + '\nLooking for: ' + project + '\n\n' + details
-      );
-      status.textContent = 'Opening your email client…';
-      window.location.href = 'mailto:hello@threeframe.studio?subject=' + subject + '&body=' + body;
+    var forms = document.querySelectorAll('.inquiry-form');
+    forms.forEach(function (form) {
+      var status = form.querySelector('.form-status');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var data = new FormData(form);
+        var name = (data.get('name') || '').toString();
+        var email = (data.get('email') || '').toString();
+        var project = (data.get('project') || '').toString();
+        var details = (data.get('details') || '').toString();
+        var subject = encodeURIComponent('New inquiry from ' + name);
+        var body = encodeURIComponent(
+          'Name: ' + name + '\nEmail: ' + email + '\nLooking for: ' + project + '\n\n' + details
+        );
+        status.textContent = 'Opening your email client…';
+        window.location.href = 'mailto:hello@threeframe.studio?subject=' + subject + '&body=' + body;
+      });
+    });
+  })();
+
+  (function () {
+    var openBtn = document.getElementById('openInquiry');
+    var closeBtn = document.getElementById('modalClose');
+    var backdrop = document.getElementById('modalBackdrop');
+    var sheet = document.getElementById('modalSheet');
+    if (!openBtn || !sheet || !backdrop) return;
+
+    function openModal() {
+      backdrop.classList.add('is-open');
+      sheet.classList.add('is-open');
+      sheet.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      var firstField = sheet.querySelector('input, select, textarea');
+      if (firstField) firstField.focus();
+    }
+    function closeModal() {
+      backdrop.classList.remove('is-open');
+      sheet.classList.remove('is-open');
+      sheet.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sheet.classList.contains('is-open')) closeModal();
     });
   })();
 </script>
