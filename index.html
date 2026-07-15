@@ -54,7 +54,7 @@
     font-family: var(--body);
     -webkit-font-smoothing: antialiased;
   }
-  body { overflow-x: hidden; }
+  body { overflow-x: hidden; padding-top: 66px; }
 
   a { color: inherit; }
 
@@ -62,7 +62,7 @@
     position: fixed;
     width: 22px;
     height: 22px;
-    z-index: 40;
+    z-index: 55;
     pointer-events: none;
     opacity: 0.55;
   }
@@ -125,46 +125,90 @@
 
   /* nav */
   nav.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 40px 0 0;
+    padding: 20px 48px;
   }
   .mark {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 12px;
   }
+  .menu-trigger {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 6px;
+    margin: -6px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .menu-trigger:focus-visible { outline: 2px solid var(--rec); outline-offset: 2px; }
   .mark .bars { display: flex; flex-direction: column; gap: 3px; }
-  .mark .bars span { display: block; height: 2px; background: var(--ink); }
+  .mark .bars span { display: block; height: 2px; background: var(--ink); transition: background-color 0.15s ease; }
   .mark .bars span:nth-child(1) { width: 18px; }
   .mark .bars span:nth-child(2) { width: 13px; }
   .mark .bars span:nth-child(3) { width: 9px; }
+  .menu-trigger:hover .bars span, .menu-trigger[aria-expanded="true"] .bars span { background: var(--rec); }
   .wordmark {
     font-family: var(--display);
     font-size: 19px;
     letter-spacing: 0.02em;
   }
   .navlinks {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: -6px;
+    z-index: 60;
     display: flex;
-    gap: 32px;
+    flex-direction: column;
+    min-width: 190px;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 8px 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s;
+  }
+  .navlinks.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .navlinks { transition: none; }
   }
   .navlinks a {
+    display: block;
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--ink-soft);
-    border-bottom: 1px solid transparent;
-    padding-bottom: 3px;
-    transition: color 0.15s, border-color 0.15s;
+    padding: 11px 20px;
+    border-left: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s, background-color 0.15s;
   }
-  .navlinks a:hover, .navlinks a:focus-visible { color: var(--ink); border-color: var(--ink-soft); }
-  .navlinks a:focus-visible { outline: 2px solid var(--rec); outline-offset: 3px; }
+  .navlinks a:hover, .navlinks a:focus-visible { color: var(--ink); border-color: var(--rec); background: var(--rec-dim); }
+  .navlinks a:focus-visible { outline: none; }
 
   /* hero */
   .hero {
@@ -429,13 +473,14 @@
 
   @media (max-width: 860px) {
     .wrap { padding: 0 22px; }
+    .nav-inner { padding: 16px 22px; }
+    body { padding-top: 58px; }
     .hero { grid-template-columns: 1fr; padding-top: 56px; }
     h1.headline { font-size: 38px; }
     .process-row, .crew-row { grid-template-columns: 1fr; }
     .step, .crew-col { border-left: none !important; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
     .step:first-child, .crew-col:first-child { border-top: none; padding-top: 0; }
     .foot-top { grid-template-columns: 1fr; gap: 40px; }
-    .navlinks { display: none; }
     .corner { display: none; }
   }
 </style>
@@ -445,20 +490,24 @@
 <div class="corner bl"></div>
 <div class="corner br"></div>
 
-<div class="wrap">
-  <nav class="top">
+<nav class="top">
+  <div class="wrap nav-inner">
     <div class="mark">
-      <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      <button class="menu-trigger" id="menuTrigger" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation menu">
+        <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
       <span class="wordmark">Threeframe</span>
+      <ul class="navlinks" id="navMenu">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#crew">Crew</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-    <ul class="navlinks">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#crew">Crew</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  </div>
+</nav>
 
+<div class="wrap">
   <section class="hero" style="padding-top:88px;">
     <div>
       <div class="eyebrow">
@@ -625,6 +674,41 @@
 </footer>
 
 <script>
+  (function () {
+    var btn = document.getElementById('menuTrigger');
+    var menu = document.getElementById('navMenu');
+    if (!btn || !menu) return;
+
+    function closeMenu() {
+      menu.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    function openMenu() {
+      menu.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (menu.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    menu.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') closeMenu();
+    });
+    document.addEventListener('click', function (e) {
+      if (!menu.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+        closeMenu();
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  })();
+
   (function () {
     var video = document.querySelector('.vf-video');
     if (!video) return;
