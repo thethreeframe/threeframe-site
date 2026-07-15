@@ -249,8 +249,8 @@
   .rotator {
     display: inline-block;
     overflow: hidden;
-    height: 1em;
-    line-height: 1;
+    height: 1.2em;
+    line-height: 1.2;
     vertical-align: bottom;
     position: relative;
     color: var(--rec);
@@ -261,8 +261,8 @@
   }
   .rotator-word {
     display: block;
-    height: 1em;
-    line-height: 1;
+    height: 1.2em;
+    line-height: 1.2;
     white-space: nowrap;
   }
   .hero p.sub {
@@ -545,7 +545,7 @@
         <span class="label">Three-person video studio</span>
       </div>
       <h1 class="headline">Videos that sell the room and bring <span class="rotator" id="rotator" aria-hidden="true"><span class="rotator-track" id="rotatorTrack"><span class="rotator-word">your</span><span class="rotator-word">company's</span><span class="rotator-word">businesses'</span><span class="rotator-word">products</span><span class="rotator-word">campaigns</span><span class="rotator-word">your</span></span></span><span class="sr-only">your</span> vision to life.</h1>
-      <p class="sub">Threeframe shoots weddings, brand campaigns, and music videos today — and we're building toward real estate and property film as our next focus. Three people, one crew, every frame considered.</p>
+      <p class="sub">ThreeFrame is the combination of two film students and a business major coming together to bring you the best in video production for your business.</p>
       <div class="cta-row">
         <a class="btn primary" href="mailto:hello@threeframe.studio">Start a project</a>
         <a class="btn ghost" href="#services">See what we shoot</a>
@@ -714,7 +714,7 @@
     setInterval(function () {
       index++;
       track.style.transition = 'transform 0.6s cubic-bezier(0.65, 0, 0.35, 1)';
-      track.style.transform = 'translateY(-' + index + 'em)';
+      track.style.transform = 'translateY(-' + (index * 1.2) + 'em)';
       if (index === wordCount) {
         setTimeout(function () {
           track.style.transition = 'none';
