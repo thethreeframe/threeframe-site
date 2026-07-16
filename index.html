@@ -213,12 +213,69 @@
 
   /* hero */
   .hero {
-    display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 48px;
-    align-items: center;
-    padding: 88px 0 110px;
+    position: relative;
+    min-height: 78vh;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 64px;
   }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(8, 9, 8, 0.1) 0%, rgba(8, 9, 8, 0.08) 35%, rgba(8, 9, 8, 0.78) 100%),
+      linear-gradient(90deg, rgba(8, 9, 8, 0.6) 0%, rgba(8, 9, 8, 0.15) 60%);
+  }
+  .hero-corner { position: absolute; width: 22px; height: 22px; z-index: 3; pointer-events: none; }
+  .hero-corner::before, .hero-corner::after { content: ""; position: absolute; background: rgba(245, 245, 240, 0.7); }
+  .hero-corner::before { width: 100%; height: 1px; }
+  .hero-corner::after { width: 1px; height: 100%; }
+  .hc-tl { top: 24px; left: 48px; } .hc-tl::before, .hc-tl::after { top: 0; left: 0; }
+  .hc-tr { top: 24px; right: 48px; } .hc-tr::before { top: 0; right: 0; } .hc-tr::after { top: 0; right: 0; }
+  .hc-bl { bottom: 24px; left: 48px; } .hc-bl::before { bottom: 0; left: 0; } .hc-bl::after { bottom: 0; left: 0; }
+  .hc-br { bottom: 24px; right: 48px; } .hc-br::before { bottom: 0; right: 0; } .hc-br::after { bottom: 0; right: 0; }
+  .hero-watermark {
+    position: absolute;
+    bottom: 24px;
+    right: 48px;
+    z-index: 3;
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(245, 245, 242, 0.85);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .hero-content .label,
+  .hero-content .headline {
+    color: #f5f5f2;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  }
+  .hero-content .sub {
+    color: rgba(245, 245, 242, 0.82);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  }
+  .hero-content .btn.ghost {
+    border-color: rgba(245, 245, 242, 0.5);
+    color: #f5f5f2;
+  }
+  .hero-content .btn.ghost:hover { border-color: #f5f5f2; }
   .hero .eyebrow {
     display: flex;
     align-items: center;
@@ -259,6 +316,7 @@
   .rotator-track {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
   .rotator-word {
     display: block;
@@ -571,7 +629,12 @@
     .wrap { padding: 0 22px; }
     .nav-inner { padding: 16px 22px; }
     body { padding-top: 58px; }
-    .hero { grid-template-columns: 1fr; padding-top: 56px; }
+    .hero { min-height: 62vh; padding-bottom: 40px; }
+    .hc-tl, .hc-tr { top: 16px; }
+    .hc-bl, .hc-br { bottom: 16px; }
+    .hc-tl, .hc-bl { left: 22px; }
+    .hc-tr, .hc-br { right: 22px; }
+    .hero-watermark { bottom: 16px; right: 22px; }
     h1.headline { font-size: 38px; }
     .process-row, .crew-row { grid-template-columns: 1fr; }
     .step, .crew-col { border-left: none !important; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
@@ -604,40 +667,32 @@
   </div>
 </nav>
 
-<div class="wrap">
-  <section class="hero" style="padding-top:88px;">
-    <div>
-      <div class="eyebrow">
-        <span class="dot live" aria-hidden="true"></span>
-        <span class="label">Three-person video studio</span>
-      </div>
-      <h1 class="headline">Videos that sell the room and bring <span class="rotator" id="rotator" aria-hidden="true"><span class="rotator-track" id="rotatorTrack"><span class="rotator-word">your</span><span class="rotator-word">company's</span><span class="rotator-word">businesses'</span><span class="rotator-word">products</span><span class="rotator-word">campaigns</span><span class="rotator-word">your</span></span></span><span class="sr-only">your</span> vision to life.</h1>
-      <p class="sub">ThreeFrame is the combination of two film students and a business major coming together to bring you the best in video production for your business.</p>
-      <div class="cta-row">
-        <button type="button" class="btn primary" id="openInquiry">Start a project</button>
-        <a class="btn ghost" href="#services">See what we shoot</a>
-      </div>
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="assets/highlight-reel.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <span class="hero-corner hc-tl"></span>
+  <span class="hero-corner hc-tr"></span>
+  <span class="hero-corner hc-bl"></span>
+  <span class="hero-corner hc-br"></span>
+  <div class="hero-watermark mono" aria-hidden="true">
+    <span>THREEFRAME</span>
+    <span id="tc">00:00:00:00</span>
+  </div>
+  <div class="wrap hero-content">
+    <div class="eyebrow">
+      <span class="dot live" aria-hidden="true"></span>
+      <span class="label">Three-person video studio</span>
     </div>
-    <div class="viewfinder" role="img" aria-label="Threeframe highlight reel, muted and looping">
-      <video class="vf-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-        <source src="assets/highlight-reel.mp4" type="video/mp4" />
-      </video>
-      <div class="vf-scrim" aria-hidden="true"></div>
-      <span class="vf-corner vf-tl"></span>
-      <span class="vf-corner vf-tr"></span>
-      <span class="vf-corner vf-bl"></span>
-      <span class="vf-corner vf-br"></span>
-      <div class="vf-center">
-        <div class="tc mono">THREEFRAME</div>
-        <div class="caption label mono" id="tc">00:00:00:00</div>
-      </div>
-      <div class="vf-bottom mono">
-        <span>THREEFRAME</span>
-        <span>SC. 01 / TK. 1</span>
-      </div>
+    <h1 class="headline">Videos that sell the room and bring <span class="rotator" id="rotator" aria-hidden="true"><span class="rotator-track" id="rotatorTrack"><span class="rotator-word">your</span><span class="rotator-word">company's</span><span class="rotator-word">businesses'</span><span class="rotator-word">products</span><span class="rotator-word">campaigns</span><span class="rotator-word">your</span></span></span><span class="sr-only">your</span> vision to life.</h1>
+    <p class="sub">ThreeFrame is the combination of two film students and a business major coming together to bring you the best in video production for your business.</p>
+    <div class="cta-row">
+      <button type="button" class="btn primary" id="openInquiry">Start a project</button>
+      <a class="btn ghost" href="#services">See what we shoot</a>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <hr class="rule" />
 
@@ -818,16 +873,24 @@
 
 <script>
   (function () {
+    var rotator = document.getElementById('rotator');
     var track = document.getElementById('rotatorTrack');
-    if (!track) return;
+    if (!rotator || !track) return;
+    var words = Array.prototype.slice.call(track.children);
+    var widths = words.map(function (w) { return w.getBoundingClientRect().width; });
+    rotator.style.width = widths[0] + 'px';
+
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return;
-    var wordCount = track.children.length - 1;
+
+    var wordCount = words.length - 1;
     var index = 0;
     setInterval(function () {
       index++;
       track.style.transition = 'transform 0.6s cubic-bezier(0.65, 0, 0.35, 1)';
       track.style.transform = 'translateY(-' + (index * 1.2) + 'em)';
+      rotator.style.transition = 'width 0.6s cubic-bezier(0.65, 0, 0.35, 1)';
+      rotator.style.width = widths[index] + 'px';
       if (index === wordCount) {
         setTimeout(function () {
           track.style.transition = 'none';
@@ -875,7 +938,7 @@
   })();
 
   (function () {
-    var video = document.querySelector('.vf-video');
+    var video = document.querySelector('.hero-video');
     if (!video) return;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
