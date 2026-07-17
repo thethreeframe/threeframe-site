@@ -53,10 +53,39 @@ html, body {
 body {
   overflow-x: hidden;
   padding-top: 66px;
+  padding-bottom: 52px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
+.email-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 45;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+.email-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .email-bar a { transition: color 0.15s ease; }
+}
+.email-bar a:hover { color: var(--rec); }
+.email-bar a:focus-visible { outline: 2px solid var(--rec); outline-offset: -2px; }
 .page-content { flex: 1 0 auto; }
 .footer-shell { flex: 0 0 auto; margin-top: auto; }
 
@@ -673,4 +702,6 @@ body.modal-open { overflow: hidden; }
   .shot { padding: 22px; margin: 0 -22px; grid-template-columns: 1fr; gap: 8px; }
   .shot .tag { margin-top: 4px; align-self: start; }
   .mini-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .inquiry-form { gap: 14px; }
+  .inquiry-form textarea { min-height: 64px; }
 }
