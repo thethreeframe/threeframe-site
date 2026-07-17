@@ -1,0 +1,76 @@
+<meta charset="utf-8" />
+<title>Contact — Threeframe</title>
+<meta name="description" content="Get in touch with Threeframe about your video project." />
+<link rel="stylesheet" href="style.css" />
+
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<nav class="top">
+  <div class="wrap nav-inner">
+    <div class="mark">
+      <button class="menu-trigger" id="menuTrigger" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation menu">
+        <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <span class="wordmark">Threeframe</span>
+      <ul class="navlinks" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="contact" class="page-content" style="padding-top: 64px;">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="reveal">
+        <h1 class="headline" style="margin-bottom: 22px;">Let's shoot<br />something.</h1>
+        <p class="foot-lede">Media, Property, Events — let's talk. Fill in our form and we'll get back to you, or reach us directly for an inquiry at <a href="mailto:thethreeframe@gmail.com">thethreeframe@gmail.com</a>. Let's get in touch.</p>
+      </div>
+      <form class="inquiry-form reveal">
+        <label>
+          <span class="label">Name</span>
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>
+          <span class="label">Email</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>
+          <span class="label">What are you looking for</span>
+          <span class="select-wrap">
+            <select name="project">
+              <option>Business campaigns</option>
+              <option>Social media and promotionals</option>
+              <option>Real estate &amp; property</option>
+              <option>Something else</option>
+            </select>
+          </span>
+        </label>
+        <label>
+          <span class="label">Tell us about your project</span>
+          <textarea name="details" required></textarea>
+        </label>
+        <button type="submit" class="btn primary">Send inquiry</button>
+        <p class="form-status mono" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="footer-shell">
+  <div class="wrap">
+    <div class="mini-footer">
+      <span class="mono">THREEFRAME STUDIO — EST. 2026</span>
+      <span>Three people, one crew.</span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
