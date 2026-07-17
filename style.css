@@ -68,12 +68,15 @@ body {
   background: var(--paper);
   border-top: 1px solid var(--line);
 }
+.email-bar-inner {
+  display: flex;
+  justify-content: flex-end;
+}
 .email-bar a {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
-  padding: 14px 22px;
+  padding: 14px 0;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.1em;
@@ -704,4 +707,5 @@ body.modal-open { overflow: hidden; }
   .mini-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
   .inquiry-form { gap: 14px; }
   .inquiry-form textarea { min-height: 64px; }
+  .email-bar-inner { justify-content: center; }
 }
