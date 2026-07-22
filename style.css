@@ -248,6 +248,29 @@ nav.top {
 .navlinks a:focus-visible { outline: none; }
 .navlinks a[aria-current="page"] { color: var(--ink); border-color: var(--rec); }
 
+.navlinks-inline {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navlinks-inline a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-soft);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 3px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.navlinks-inline a:hover, .navlinks-inline a:focus-visible { color: var(--ink); border-color: var(--ink-soft); }
+.navlinks-inline a:focus-visible { outline: 2px solid var(--rec); outline-offset: 3px; }
+.navlinks-inline a[aria-current="page"] { color: var(--ink); border-color: var(--rec); }
+
 /* hero */
 .hero {
   position: relative;
@@ -708,4 +731,5 @@ body.modal-open { overflow: hidden; }
   .inquiry-form { gap: 14px; }
   .inquiry-form textarea { min-height: 64px; }
   .email-bar-inner { justify-content: center; }
+  .navlinks-inline { display: none; }
 }
