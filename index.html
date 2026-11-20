@@ -1,8 +1,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Threeframe — Video Production Studio</title>
-<meta name="description" content="Threeframe is a three-person video studio shooting weddings, brand work, and music videos — building toward real estate and property film." />
+<title>Threeframe | Video Production Studio</title>
+<meta name="description" content="Threeframe is a three-person video studio shooting brand campaigns, social content, short film, and real estate." />
 <link rel="stylesheet" href="style.css" />
+
+<script>try{if(!sessionStorage.getItem("tfIntro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("intro-on");sessionStorage.setItem("tfIntro","1");}}catch(e){}</script>
+<div class="intro" id="intro" aria-hidden="true"><span class="intro-mark">Threeframe</span><span class="intro-sub mono">Orange County, California</span></div>
 
 <div class="corner tl"></div>
 <div class="corner tr"></div>
@@ -15,27 +18,25 @@
       <button class="menu-trigger" id="menuTrigger" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation menu">
         <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
-      <span class="wordmark">Threeframe</span>
+      <a class="wordmark" href="index.html" aria-current="page">Threeframe</a>
       <ul class="navlinks" id="navMenu">
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="services.html">Services</a></li>
         <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Work</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
     <ul class="navlinks-inline">
-      <li><a href="index.html" aria-current="page">Home</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="services.html">Services</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Work</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
 </nav>
 
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+  <video class="hero-video" poster="assets/work/controlled/02.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
     <source src="assets/highlight-reel.mp4" type="video/mp4" />
   </video>
   <div class="hero-scrim" aria-hidden="true"></div>
@@ -56,7 +57,109 @@
     <p class="sub">ThreeFrame is the combination of two film students and a business major coming together to bring you the best in video production for your business.</p>
     <div class="cta-row">
       <button type="button" class="btn primary" id="openInquiry">Start a project</button>
-      <a class="btn ghost" href="portfolio.html">See what we shoot</a>
+      <a class="btn ghost" href="portfolio.html">See our work</a>
+    </div>
+  </div>
+</section>
+
+<section class="statement light">
+  <div class="wrap statement-inner">
+    <span class="label reveal">What we do</span>
+    <div class="reveal">
+      <h2>Film and photography for brands, businesses, and listings across Southern California.</h2>
+      <p>We are a three-person crew. One of us shoots and edits, one plans the creative, and one runs the project, so you always know who to talk to and what happens next.</p>
+      <a class="text-link mono" href="services.html">Our services</a>
+    </div>
+  </div>
+</section>
+
+<section class="work-strip light">
+  <div class="wrap">
+    <div class="work-strip-head reveal">
+      <span class="label">Selected work</span>
+      <a class="work-all mono" href="portfolio.html">View all</a>
+    </div>
+    <div class="work-tiles">
+      <a class="work-tile reveal" href="portfolio.html#split">
+        <img loading="lazy" src="assets/work/split/01.jpg" width="1920" height="823" alt="Two people sit side by side on a concrete ledge, seen from behind, facing an office building." />
+        <span class="work-tile-meta">
+          <span class="label">Short film</span>
+          <span class="work-tile-title">Split</span>
+        </span>
+      </a>
+      <a class="work-tile reveal" href="portfolio.html#controlled">
+        <img loading="lazy" src="assets/work/controlled/03.jpg" width="1800" height="1200" alt="Three models pose on a white studio set, framed by crew members in silhouette." />
+        <span class="work-tile-meta">
+          <span class="label">Behind the scenes</span>
+          <span class="work-tile-title">Controlled Insanity</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="svc-overview light">
+  <div class="wrap">
+    <div class="work-strip-head reveal">
+      <span class="label">Services</span>
+      <a class="work-all mono" href="services.html">View all</a>
+    </div>
+    <div class="svc-cards">
+      <a class="svc-card reveal" href="services.html#brand">
+        <span class="num mono">01</span>
+        <h3>Brand and commercial</h3>
+        <p>Campaign films, product spots, and behind the scenes coverage.</p>
+      </a>
+      <a class="svc-card reveal" href="services.html#social">
+        <span class="num mono">02</span>
+        <h3>Social content</h3>
+        <p>Short-form video cut for the platforms you post on.</p>
+      </a>
+      <a class="svc-card reveal" href="services.html#real-estate">
+        <span class="num mono">03</span>
+        <h3>Real estate</h3>
+        <p>Listing films and photography for agents.</p>
+        <span class="tag">Coming soon</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="home-contact" id="start">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="reveal">
+        <span class="label">Start a project</span>
+        <h2 class="home-contact-title">Tell us about your project.</h2>
+        <p class="foot-lede">Fill in the form and we will get back to you, or email us at <a href="mailto:thethreeframe@gmail.com">thethreeframe@gmail.com</a>.</p>
+      </div>
+      <form class="inquiry-form reveal">
+        <label>
+          <span class="label">Name</span>
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>
+          <span class="label">Email</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>
+          <span class="label">What are you looking for</span>
+          <span class="select-wrap">
+            <select name="project">
+              <option>Business campaigns</option>
+              <option>Social media and promotionals</option>
+              <option>Real estate &amp; property</option>
+              <option>Something else</option>
+            </select>
+          </span>
+        </label>
+        <label>
+          <span class="label">Tell us about your project</span>
+          <textarea name="details" required></textarea>
+        </label>
+        <button type="submit" class="btn primary">Send inquiry</button>
+        <p class="form-status mono" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -64,7 +167,7 @@
 <div class="footer-shell">
   <div class="wrap">
     <div class="mini-footer">
-      <span class="mono">THREEFRAME STUDIO — EST. 2026</span>
+      <span class="mono">THREEFRAME STUDIO / EST. 2026</span>
       <span>Three people, one crew.</span>
     </div>
   </div>
