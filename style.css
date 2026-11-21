@@ -261,7 +261,8 @@ nav.top {
 /* hero */
 .hero {
   position: relative;
-  min-height: 78vh;
+  min-height: calc(100vh - 66px);
+  min-height: calc(100svh - 66px);
   overflow: hidden;
   display: flex;
   align-items: flex-end;
@@ -275,6 +276,17 @@ nav.top {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+}
+/* hide Safari's native play button when autoplay is blocked (e.g. Low Power Mode) */
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-panel,
+.hero-video::-webkit-media-controls-play-button,
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+  pointer-events: none;
 }
 .hero-scrim {
   position: absolute;
@@ -736,7 +748,7 @@ body.modal-open { overflow: hidden; }
   .wrap { padding: 0 22px; }
   .nav-inner { padding: 16px 22px; }
   body { padding-top: 58px; }
-  .hero { min-height: 62vh; padding-bottom: 40px; }
+  .hero { min-height: calc(100vh - 58px); min-height: calc(100svh - 58px); padding-bottom: 64px; }
   .hc-tl, .hc-tr { top: 16px; }
   .hc-bl, .hc-br { bottom: 16px; }
   .hc-tl, .hc-bl { left: 22px; }
